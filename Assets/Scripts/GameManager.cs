@@ -18,13 +18,16 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text question;
 
-    public string input;
-    public string randomWord;
+    private string input;
+    private string randomWord;
 
     // Start is called before the first frame update
     void Start()
     {
         currentTime = 3.5f;
+
+        RandomWordCreate();
+        gameOverPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,7 +42,15 @@ public class GameManager : MonoBehaviour
             currentTime -= Time.deltaTime;
             myTime.text = currentTime.ToString("F0");
         }
+        question.text = randomWord;
 
+        if(currentTime < 0.5f)
+        {
+            RandomWordCreate();
+        }
+
+
+        GameOver();
         
     }
 
@@ -51,10 +62,30 @@ public class GameManager : MonoBehaviour
         if (randomWord == input)
         {
             score++;
+            RandomWordCreate();
         }
 
-        randomWord = word[Random.Range(0, 10)];
-        question.text = randomWord;
+        
     }
 
+    void RandomWordCreate()
+    {
+
+        int randomint = Random.Range(0,10);
+        randomWord = word[randomint];
+
+        currentTime = 3.5f;
+    }
+
+
+    public GameObject gameOverPanel;
+    public TMP_Text currentScore;
+    void GameOver()
+    {
+        if(score == 10)
+        {
+            gameOverPanel.SetActive(true);
+            currentScore.text = "맞춘 갯수 : " + score.ToString();
+        }
+    }
 }
