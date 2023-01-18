@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
         }
         question.text = randomWord;
 
-        if(currentTime < 0.5f)
+        if(currentTime < 0.1f)
         {
             RandomWordCreate();
         }
@@ -71,8 +72,9 @@ public class GameManager : MonoBehaviour
     void RandomWordCreate()
     {
 
-        int randomint = Random.Range(0,10);
+        int randomint =  Random.Range(1, 10);
         randomWord = word[randomint];
+        
 
         currentTime = 3.5f;
     }
@@ -87,5 +89,10 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(true);
             currentScore.text = "맞춘 갯수 : " + score.ToString();
         }
+    }
+
+    public void ReturnLoby()
+    {
+        SceneManager.LoadScene(0);
     }
 }
