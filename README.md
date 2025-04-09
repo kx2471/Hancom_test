@@ -1,5 +1,4 @@
 # Hancom_test
-한글과컴퓨터_직무능력테스트
 
 HANCOM_Test.exe 빌드된 실행파일
 
